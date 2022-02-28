@@ -16,7 +16,7 @@
 
 package co.paulburke.android.itemtouchhelperdemo.helper;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Listener for manual initiation of a drag.
@@ -29,5 +29,4 @@ public interface OnStartDragListener {
      * @param viewHolder The holder of the view to drag.
      */
     void onStartDrag(RecyclerView.ViewHolder viewHolder);
-
 }

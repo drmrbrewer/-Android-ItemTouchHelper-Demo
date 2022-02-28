@@ -17,21 +17,20 @@
 package co.paulburke.android.itemtouchhelperdemo;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 /**
  * @author Paul Burke (ipaulpro)
  */
-public class MainActivity extends ActionBarActivity implements MainFragment.OnListItemClickListener {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnListItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         if (savedInstanceState == null) {
             MainFragment fragment = new MainFragment();
@@ -59,5 +58,4 @@ public class MainActivity extends ActionBarActivity implements MainFragment.OnLi
                 .addToBackStack(null)
                 .commit();
     }
-
 }
