@@ -16,8 +16,10 @@
 
 package co.paulburke.android.itemtouchhelperdemo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,6 +64,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         return itemViewHolder;
     }
 
+    @SuppressLint("ClickableViewAccessibility") // https://stackoverflow.com/a/50345118/4070848
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
         holder.textView.setText(mItems.get(position));
@@ -70,7 +73,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.handleView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     mDragStartListener.onStartDrag(holder);
                 }
                 return false;
@@ -86,6 +89,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
+        Log.d("", "onItemMove");
         Collections.swap(mItems, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         return true;
