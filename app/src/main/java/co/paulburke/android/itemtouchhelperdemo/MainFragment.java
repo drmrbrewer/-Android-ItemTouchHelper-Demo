@@ -16,12 +16,13 @@
 
 package co.paulburke.android.itemtouchhelperdemo;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
 /**
@@ -39,10 +40,10 @@ public class MainFragment extends ListFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
-        mItemClickListener = (OnListItemClickListener) activity;
+        mItemClickListener = (OnListItemClickListener) context;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MainFragment extends ListFragment {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
         mItemClickListener.onListItemClick(position);
     }
 }

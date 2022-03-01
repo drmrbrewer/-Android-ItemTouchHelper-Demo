@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
                 break;
         }
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, fragment)
-                .addToBackStack(null)
-                .commit();
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

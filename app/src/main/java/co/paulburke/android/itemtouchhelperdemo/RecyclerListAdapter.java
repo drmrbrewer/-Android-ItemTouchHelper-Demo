@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.view.MotionEventCompat;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import co.paulburke.android.itemtouchhelperdemo.helper.OnStartDragListener;
 
 /**
  * Simple RecyclerView.Adapter that implements {@link ItemTouchHelperAdapter} to respond to move and
- * dismiss events from a {@link android.support.v7.widget.helper.ItemTouchHelper}.
+ * dismiss events from a {@link androidx.recyclerview.widget.ItemTouchHelper}.
  *
  * @author Paul Burke (ipaulpro)
  */
@@ -57,11 +57,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dummy_items)));
     }
 
+    @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
-        ItemViewHolder itemViewHolder = new ItemViewHolder(view);
-        return itemViewHolder;
+        return new ItemViewHolder(view);
     }
 
     @SuppressLint("ClickableViewAccessibility") // https://stackoverflow.com/a/50345118/4070848
@@ -70,14 +70,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.textView.setText(mItems.get(position));
 
         // Start a drag whenever the handle view it touched
-        holder.handleView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
-                }
-                return false;
+        holder.handleView.setOnTouchListener((v, event) -> {
+            if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                mDragStartListener.onStartDrag(holder);
             }
+            return false;
         });
     }
 
