@@ -43,6 +43,11 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         mAdapter = adapter;
     }
 
+    /*
+     * with long press drag enabled below, as well as the drag handle for immediate dragging (we manually attach
+     * an setOnTouchListener to the drag handle ImageView in the onBindViewHolder() method of the associated Adapter)
+     * we also enter into drag mode after long pressing on the element
+     */
     @Override
     public boolean isLongPressDragEnabled() {
         return true;
